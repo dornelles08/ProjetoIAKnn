@@ -10,13 +10,12 @@ import json
 
 
 def load_dataset():
-    with open("recursos/dataset.csv") as csvfile:
+    with open("Back-end/polls/recursos/dataset.csv") as csvfile:
         dataset = list(csv.reader(csvfile))
 
     return dataset
 
 def split_train_test(dataset, split_ratio=0.2):
-    dataset = random.sample(dataset, len(dataset))
 
     test_ratio = int(len(dataset)*split_ratio)
     train_ratio = len(dataset) - test_ratio
@@ -24,12 +23,10 @@ def split_train_test(dataset, split_ratio=0.2):
     test_data = dataset[test_ratio:]
     train_data = dataset[:train_ratio]
 
-    test_X = [data[:7] for data in test_data]
-    test_Y = [data[7] for data in test_data]
-    train_X = [data[:7] for data in train_data]
-    train_Y = [data[7] for data in train_data]
+    train_X = [data[:7] for data in dataset]
+    train_Y = [[data[7], data[8]] for data in dataset] 
 
-    return train_X, train_Y, test_X, test_Y
+    return train_X, train_Y
 
 def euclidean_distance(point_p, point_q):
     square_diffs = lambda p_i, q_i: (float(q_i) - float(p_i)) ** 2 #função que calcula o quadrado da diferença entre dois pontos
@@ -42,27 +39,12 @@ def knn(train_set, test_instance, k=1):
     return sorted(range(len(distance)), key=lambda i: distance[i])[:k]
 
 def predict(train_y, k_n):
-    knn_labels = [train_y[i] for i in k_n]
-
+    knn_labels = [train_y[i][0] for i in k_n]
     return max(set(knn_labels), key=knn_labels.count)
 
-def evaluate(predictions, test_y):
-    #for idx, prediction in enumerate(predictions):
-        #print(f' > Predicted = {prediction}, Actual = {test_y[idx]}')
-
-    accuracy = sum(i == j for i, j in zip(predictions, test_y)) / len(test_y) * 100.0
-
-    #print(f'Model accuracy: {accuracy:.2f}%')
-    return accuracy
-
-
 def detail(request, attributes):
-    train_x, train_y, test_x, test_y = split_train_test(load_dataset())
+    train_x, train_y = split_train_test(load_dataset())
 
-    predictions = []
-
-    #for instamce_test in test_x:
-        #k_n = knn(train_x, instamce_test)
     instance = []
 
     attributes = attributes.split(",")
@@ -70,19 +52,11 @@ def detail(request, attributes):
         instance.append(float(attribute))
 
     k_n = knn(train_x, instance)
-    predictions.append(predict(train_y, k_n))
+    position = predict(train_y, k_n)
+    overall = train_y[k_n[0]][1]
 
     response = {}
-    response['position'] = predictions[0]
+    response['position'] = position
+    response['overall'] = overall
 
-    #response["Access-Control-Allow-Origin"] = "*"
-    #response["Access-Control-Allow-Methods"] = "GET, OPTIONS"
-    #response["Access-Control-Max-Age"] = "1000"
-    #response["Access-Control-Allow-Headers"] = "X-Requested-With, Content-Type"
     return JsonResponse(response)
-        
-    
-    #return HttpResponse(instance)
-    #return HttpResponse(test_x[0])
-    #return HttpResponse(predictions[0])
-    #return HttpResponse(evaluate(predictions, test_y))
