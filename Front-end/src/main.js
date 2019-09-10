@@ -67,21 +67,23 @@ class App {
             // Renderizando a tela.
             this.renderiza();
         } catch (erro) {
-            alert('Erro ao acessar a API!')
+            alert('Erro ao acessar a API!');
+
+            this.renderiza();
         }
     }
 
     renderiza() {
         // Setando os valores ao form
-        document.getElementById('valPas').textContent = this.ritmo.value
-        document.getElementById('valDri').textContent = this.drible.value
-        document.getElementById('valSho').textContent = this.finalizacao.value
-        document.getElementById('valDef').textContent = this.defesa.value
-        document.getElementById('valPac').textContent = this.passe.value
-        document.getElementById('valPhy').textContent = this.fisico.value
+        document.getElementById('valPas').textContent = ~~this.ritmo.value
+        document.getElementById('valDri').textContent = ~~this.drible.value
+        document.getElementById('valSho').textContent = ~~this.finalizacao.value
+        document.getElementById('valDef').textContent = ~~this.defesa.value
+        document.getElementById('valPac').textContent = ~~this.passe.value
+        document.getElementById('valPhy').textContent = ~~this.fisico.value
 
         // Setando o overall e a Posição
-        document.getElementById('overall').textContent = this.overall.value
+        document.getElementById('overall').textContent = ~~this.overall.value
         document.getElementById('posicao').textContent = this.posicao.value
 
         // Mostrando resultado
