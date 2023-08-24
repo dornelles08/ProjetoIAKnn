@@ -1,0 +1,8 @@
+certifi==2023.7.22
+distlib==0.3.7
+ffmpeg==1.4
+filelock==3.12.2
+PDFNetPython3==9.5.0.post1
+pipenv==2023.8.20
+platformdirs==3.10.0
+virtualenv==20.24.3
