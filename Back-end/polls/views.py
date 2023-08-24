@@ -10,7 +10,7 @@ import json
 
 
 def load_dataset():
-    with open("Back-end/polls/recursos/dataset.csv") as csvfile:
+    with open("polls/recursos/dataset.csv") as csvfile:
         dataset = list(csv.reader(csvfile))
 
     return dataset
