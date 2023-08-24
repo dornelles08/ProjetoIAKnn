@@ -25,10 +25,7 @@ SECRET_KEY = 'e_hnplv4=m5#+jmg=zsgft0+5)r5#8*ug9itu$kq7fhu2hhr(%'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = [
-    'http://localhost:80/Front-end/',
-    '127.0.0.1'
-]
+ALLOWED_HOSTS = []
 
 CORS_ORIGIN_ALLOW_ALL = True
 
