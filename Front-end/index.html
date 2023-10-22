@@ -1,0 +1,234 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <title>Player Classifier</title>
+
+    <link
+      rel="stylesheet"
+      href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
+      integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T"
+      crossorigin="anonymous"
+    />
+
+    <link rel="stylesheet" href="style.css" />
+  </head>
+
+  <body>
+    <div class="container">
+      <!-- NAVBAR -->
+      <nav class="navbar navbar-expand-lg navbar-light bg-light">
+        <a class="navbar-brand">PROJETO IA</a>
+        Posicionamento de jogados de acordo com Habilidades
+      </nav>
+
+      <!-- INICIO FORM -->
+      <div class="row" style="margin-top: 2%">
+        <div class="col-sm-8">
+          <div class="row">
+            <h3 style="margin-bottom: 1%">Conjunto de Habilidades</h3>
+          </div>
+          <form id="formDados">
+            <div class="row">
+              <div class="form-group col">
+                <label for="ritmo">Ritmo</label>
+                <input
+                  type="text"
+                  class="form-control"
+                  id="ritmo"
+                  placeholder="77.5"
+                />
+              </div>
+              <div class="form-group col">
+                <label for="drible">Drible</label>
+                <input
+                  type="text"
+                  class="form-control"
+                  id="drible"
+                  placeholder="88.5"
+                />
+              </div>
+            </div>
+
+            <div class="row">
+              <div class="form-group col">
+                <label for="finalizacao">Finalização</label>
+                <input
+                  type="text"
+                  class="form-control"
+                  id="finalizacao"
+                  placeholder="77.5"
+                />
+              </div>
+              <div class="form-group col">
+                <label for="defesa">Defesa</label>
+                <input
+                  type="text"
+                  class="form-control"
+                  id="defesa"
+                  placeholder="88.5"
+                />
+              </div>
+            </div>
+
+            <div class="row">
+              <div class="form-group col">
+                <label for="passe">Passe</label>
+                <input
+                  type="text"
+                  class="form-control"
+                  id="passe"
+                  placeholder="77.5"
+                />
+              </div>
+              <div class="form-group col">
+                <label for="fisico">Fisico</label>
+                <input
+                  type="text"
+                  class="form-control"
+                  id="fisico"
+                  placeholder="88.5"
+                />
+              </div>
+            </div>
+
+            <div class="row">
+              <div class="form-group col-sm-6">
+                <label for="goleiro">Goleiro</label>
+                <input
+                  type="text"
+                  class="form-control"
+                  id="goleiro"
+                  placeholder="77.5"
+                />
+              </div>
+            </div>
+
+            <!-- botao submit -->
+            <button type="submit" class="btn btn-primary">Gerar Posição</button>
+          </form>
+          <br>
+          <button id="test" class="btn btn-info">
+            Preencher valores teste
+          </button>
+        </div>
+        <!-- FIM FORM -->
+
+        <div class="col-sm-4">
+          <div class="container">
+            <!-- FOTO -->
+            <div class="fifaModel" id="cardFifa">
+              <div class="inicio"></div>
+              <div class="meio">
+                <div class="row t">
+                  <div class="form-group col-sm">
+                    <div class="row">
+                      <div class="col-sm-3 m">
+                        <h1 id="overall"></h1>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="form-group col-sm">
+                    <div class="row">
+                      <div class="col-sm-3">
+                        <h1 class="d" id="posicao"></h1>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <!-- VALORES -->
+              <div class="fim">
+                <form>
+                  <div class="row t">
+                    <div class="form-group col-sm">
+                      <div class="row">
+                        <div class="col-sm-3 m">
+                          <h6 id="valPac"></h6>
+                        </div>
+                        <div class="col-sm-3">
+                          <h4>PAC</h4>
+                        </div>
+                      </div>
+                    </div>
+                    <div class="form-group col-sm">
+                      <div class="row">
+                        <div class="col-sm-3">
+                          <h6 id="valDri"></h6>
+                        </div>
+                        <div class="col-sm-3">
+                          <h4>DRI</h4>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+
+                  <div class="row t">
+                    <div class="form-group col-sm">
+                      <div class="row">
+                        <div class="col-sm-3 m">
+                          <h6 id="valSho"></h6>
+                        </div>
+                        <div class="col-sm-3">
+                          <h4>SHO</h4>
+                        </div>
+                      </div>
+                    </div>
+                    <div class="form-group col-sm">
+                      <div class="row">
+                        <div class="col-sm-3">
+                          <h6 id="valDef"></h6>
+                        </div>
+                        <div class="col-sm-3">
+                          <h4>DEF</h4>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+
+                  <div class="row t">
+                    <div class="form-group col-sm">
+                      <div class="row">
+                        <div class="col-sm-3 m">
+                          <h6 id="valPas"></h6>
+                        </div>
+                        <div class="col-sm-3">
+                          <h4>PAS</h4>
+                        </div>
+                      </div>
+                    </div>
+                    <div class="form-group col-sm">
+                      <div class="row">
+                        <div class="col-sm-3">
+                          <h6 id="valPhy"></h6>
+                        </div>
+                        <div class="col-sm-3">
+                          <h4>PHY</h4>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </form>
+              </div>
+            </div>
+            <!-- FIM FOTO -->
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <script src="./main.js"></script>
+    <script
+      src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
+      integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
+      crossorigin="anonymous"
+    ></script>
+    <script
+      src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"
+      integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1"
+      crossorigin="anonymous"
+    ></script>
+  </body>
+</html>
