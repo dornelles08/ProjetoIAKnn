@@ -63,14 +63,9 @@ class App {
 
     try {
       // Chamando a API e passando as informações.
-      const resposta =
-        await api.get(`\/${this.ritmo.value},${this.drible.value},
-            ${this.finalizacao.value},
-            ${this.defesa.value},
-            ${this.passe.value},
-            ${this.fisico.value},
-            ${this.goleiro.value}
-            `);
+      const resposta = await api.get(
+        `classifier?data=${this.ritmo.value},${this.drible.value},${this.finalizacao.value},${this.defesa.value},${this.passe.value},${this.fisico.value},${this.goleiro.value}`
+      );
 
       // Resposta obtida
       const { position, overall } = resposta;
@@ -84,6 +79,7 @@ class App {
       // Renderizando a tela.
       this.renderiza();
     } catch (erro) {
+      console.log(erro);
       alert("Erro ao acessar a API!");
 
       //   this.renderiza();
@@ -111,7 +107,7 @@ new App();
 
 class Api {
   async get(params) {
-    const response = await fetch(`http://localhost:8000/polls${params}`);
+    const response = await fetch(`http://localhost:8000/${params}`);
     return await response.json();
   }
 }

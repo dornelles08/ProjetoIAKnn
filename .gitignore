@@ -3,3 +3,5 @@
 geckodriver.log
 Testes.spec
 TestesWeb.exe
+__pycache__
+json_data.json

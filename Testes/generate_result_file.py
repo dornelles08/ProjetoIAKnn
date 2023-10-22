@@ -1,7 +1,10 @@
 import csv
+import json
+from time import time
+
 import requests
 
-import json
+inicio = time()
 
 arq = open('testes.csv', 'r')
 dados = list(csv.reader(arq))
@@ -13,7 +16,8 @@ for dado in dados:
     labels = dado[-2:]
     infos = dado[:-2]
 
-    response = requests.get(f"http://localhost:8000/polls/{','.join(infos)}")
+    response = requests.get(
+        f"http://localhost:8000/classifier?data={','.join(infos)}")
 
     result = response.json()
 
@@ -27,3 +31,7 @@ for dado in dados:
 
 with open('json_data.json', 'w') as outfile:
     json.dump(resultFinal, outfile)
+
+fim = time()
+
+print(fim-inicio)
