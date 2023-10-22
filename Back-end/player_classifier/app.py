@@ -1,5 +1,6 @@
 from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
+from player_classifier.schemas import Classifier
 
 from .functions.player_classifier import classifier
 
@@ -14,7 +15,7 @@ app.add_middleware(
 )
 
 
-@app.get('/classifier', status_code=200)
+@app.get('/classifier', status_code=200, response_model=Classifier)
 def player_classifier(data: str):
     result = classifier(data)
     return result

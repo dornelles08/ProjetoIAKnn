@@ -46,8 +46,5 @@ def classifier(attributes):
     position = predict(train_y, k_n)
     overall = train_y[k_n[0]][1]
 
-    response = {}
-    response['position'] = position
-    response['overall'] = overall
-
-    return response
+    return {'position': position,
+            'overall': overall}
