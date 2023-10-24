@@ -1,6 +1,6 @@
 from pydantic import BaseModel
 
 
-class Classifier(BaseModel):
+class Classification(BaseModel):
     position: str
     overall: int

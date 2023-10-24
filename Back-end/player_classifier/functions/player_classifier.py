@@ -1,14 +1,14 @@
 import csv
 
 
-def load_dataset():
+def load_dataset() -> list[list[str]]:
     with open("player_classifier/recursos/dataset.csv") as csvfile:
         dataset = list(csv.reader(csvfile))
 
     return dataset
 
 
-def split_train_test(dataset, split_ratio=0.2):
+def split_train_test(dataset:list[list[str]]):
     train_X = [data[:7] for data in dataset]
     train_Y = [[data[7], data[8]] for data in dataset]
 
@@ -23,7 +23,7 @@ def euclidean_distance(point_p, point_q):
     return sum(distance)**0.5
 
 
-def knn(train_set, test_instance, k=1):
+def knn(train_set, test_instance, k=1) -> list[int]:
     distance = [euclidean_distance(X, test_instance) for X in train_set]
     return sorted(range(len(distance)), key=lambda i: distance[i])[:k]
 
@@ -33,12 +33,12 @@ def predict(train_y, k_n):
     return max(set(knn_labels), key=knn_labels.count)
 
 
-def classifier(attributes):
+def classifier(attributes: str):
     train_x, train_y = split_train_test(load_dataset())
 
-    instance = []
+    instance: list[float] = []
 
-    attributes = attributes.split(",")
+    attributes: list[str] = attributes.split(",")
     for attribute in attributes:
         instance.append(float(attribute))
 
