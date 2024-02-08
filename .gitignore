@@ -5,3 +5,5 @@ Testes.spec
 TestesWeb.exe
 __pycache__
 json_data.json
+venv
+.DS_Store
