@@ -36,7 +36,7 @@ O funcionamento básico do KNN envolve identificar os 'k' vizinhos mais próximo
 
 2. **Back-end**
 
-A partir da pasta Back-end executar o seuginte comando:
+A partir da pasta Back-end executar o seguinte comando:
 
 ```bash
   uvicorn player_classifier.app:app --reload
